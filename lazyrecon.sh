@@ -85,15 +85,15 @@ enumeratesubdomains(){
     echo "wait PID_SUBFINDER_FIRST $PID_SUBFINDER_FIRST and PID_ASSETFINDER $PID_ASSETFINDER"
     wait $PID_SUBFINDER_FIRST $PID_ASSETFINDER
     echo "PID_SUBFINDER_FIRST $PID_SUBFINDER_FIRST and PID_ASSETFINDER $PID_ASSETFINDER done."
-    # echo "amass..."
-    # amass enum --passive -log $TARGETDIR/amass_errors.log -d $1 -o $TARGETDIR/amass-list.txt
+    echo "amass..."
+    amass enum --passive -log $TARGETDIR/amass_errors.log -d $1 -o $TARGETDIR/amass-list.txt
 
     SCOPE=$1
     grep "[.]${SCOPE}$" $TARGETDIR/assetfinder-list.txt | sort -u -o $TARGETDIR/assetfinder-list.txt
     # remove all lines start with *-asterix and out-of-scope domains
     sed "${SEDOPTION[@]}" '/^*/d' $TARGETDIR/assetfinder-list.txt
     # sort enumerated subdomains
-    sort -u "$TARGETDIR"/subfinder-list.txt $TARGETDIR/assetfinder-list.txt "$TARGETDIR"/github-subdomains-list.txt -o "$TARGETDIR"/enumerated-subdomains.txt
+    sort -u "$TARGETDIR"/subfinder-list.txt $TARGETDIR/assetfinder-list.txt "$TARGETDIR"/github-subdomains-list.txt $TARGETDIR/amass-list.txt -o "$TARGETDIR"/enumerated-subdomains.txt
 
     if [[ -s "$TARGETDIR"/enumerated-subdomains.txt ]]; then
       sed "${SEDOPTION[@]}" '/^[.]/d' $TARGETDIR/enumerated-subdomains.txt
