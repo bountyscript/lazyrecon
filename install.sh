@@ -34,11 +34,15 @@ third_party_go_dependencies(){
     gotools[13]="go get github.com/detectify/page-fetch"
     gotools[14]="go get github.com/d3mondev/puredns/v2"
     gotools[15]="go get -u github.com/sensepost/gowitness"
+    gotools[16]="go get github.com/cgboal/sonarsearch/crobat"
+    gotools[17]="GO111MODULE=on go get -v github.com/projectdiscovery/dnsprobe"
+    gotools[18]="GO111MODULE=on go get -v github.com/projectdiscovery/shuffledns/cmd/shuffledns"
 
     for gotool in "${gotools[@]}"; do
         $gotool
     done
-
+    wget -nc "https://github.com/projectdiscovery/naabu/releases/download/v2.0.4/naabu_2.0.4_linux_amd64.zip" && unzip naabu_2.0.4_linux_amd64.zip && cp naabu /bin/ && cp naabu /sbin/ && cp naabu /usr/local/bin/ && cp naabu /usr/local/sbin/
+    wget -nc "https://github.com/projectdiscovery/nuclei/releases/download/v2.4.3/nuclei_2.4.3_linux_amd64.zip" && unzip nuclei_2.4.3_linux_amd64.zip && cp nuclei /bin/ && cp nuclei /sbin/ && cp nuclei /usr/local/bin/ && cp nuclei /usr/local/sbin/
     nuclei -ut -ud "$HOMEDIR/nuclei-templates"
 
     mkdir -p $HOMEDIR/.gf
