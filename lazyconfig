@@ -1,8 +1,8 @@
-export HOMEUSER=root
-export HOMEDIR=/root
+export HOMEUSER=
+export HOMEDIR=
 export STORAGEDIR=${HOMEDIR}/lazytargets
 
-export GITHUBTOKEN=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
+export GITHUBTOKEN=
 export DISCORDWEBHOOKURL=
 
 export GOPATH=$HOMEDIR/go
